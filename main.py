@@ -1,7 +1,7 @@
 import random
-
 from pprint import pprint
 from player import player_profile
+from player import Player
 
 
 # REMEMBER TO USE PDB
@@ -12,25 +12,23 @@ class Tournament:
     def __init__(self):
         self.participants = []
         self.defeated = []
+        self.player_limit = 8
         self.init()
 
     def init(self):
-
         # Uses a function from player.py to generate player profiles and adds
         # them to a list of participants
-
-        part = []
-        for f in range(8):
+        self.participants = []
+        for n in range(self.player_limit):
             p = player_profile()
-            part.append(p)
+            self.participants.append(p)
             print(p.name, p.nickname)
-            for x in range(len(p.army)):
-                # find a better formula
-                pprint(p.army[x].name)
+            for unit in p.army:
+                pprint(unit.name)
                 # dir(name of variable)
-        self.participants = part
 
-        return part
+        return self.participants
+
 
     def tournament_standing(self, remaining):
         # will be part of the class as the project evolves,implement later
@@ -44,8 +42,6 @@ class Tournament:
 
 
 tournament = Tournament()
-# this is a test to make sure combat works
-print(f"{tournament.participants[1].name}'s {tournament.participants[1].army[0].name} hits {tournament.participants[0].name} {tournament.participants[0].army[0].name}")
-print(f"{tournament.participants[0].army[0].name}, Unit health before combat: {tournament.participants[0].army[0].health}")
-tournament.participants[1].army[0].attack(tournament.participants[0].army[0])
-print(f"{tournament.participants[0].army[0].name}'s health after combat: {tournament.participants[0].army[0].health}")
+print(tournament.participants)
+for participants in tournament.participants:
+    pprint(participants.name)

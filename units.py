@@ -1,5 +1,5 @@
 # name,cost,attacks,strength,damage,critical,toughness,health,keyword
-Warbands= {
+Warbands = {
 
     "human": [
           {

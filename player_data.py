@@ -86,7 +86,7 @@ names={
     ]
 
 }
-races=["orc","human","elf","undead"]
+races=["orc", "human", "elf", "undead"]
 
 
 def get_name():
