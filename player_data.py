@@ -1,8 +1,9 @@
 import random
 
 
-names={
+names = {
     "fname": [
+         "Robik",
          "Mihai",
          "Radu",
          "Diab",
@@ -56,7 +57,8 @@ names={
         "Lights bane",
         "Slayer of the meek",
         "Poxbringer",
-        "cronescovici"
+        "cronescovici",
+        "Fara Frik"
 
      ],
     "nickname":[
@@ -86,7 +88,7 @@ names={
     ]
 
 }
-races=["orc", "human", "elf", "undead"]
+races=["orc","human","elf","undead"]
 
 
 def get_name():

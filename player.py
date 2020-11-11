@@ -17,31 +17,39 @@ class Player:
         self.dummy_army = army #For now this is similar to health/current health to make resetting post combat easier
         self.disqualified = disqualified
 
-    def war(self, enemy_player):
-
-        print(self.army_alive())
-        random.shuffle(self.army)
-        random.shuffle(enemy_player.army)
-        print(self.army_alive())
-
-        while self.army_alive and enemy_player.army_alive :
-            for unit1, unit2 in zip_longest(self.army, enemy_player.army,
-                                            fillvalue=None):
-                if unit1 is not None:
-                    target = random.choice(enemy_player.army)
-                    unit1.attack(target)
-
-
-                if unit2 is not None:
-                    target = random.choice(self.army)
-                    unit2.attack(target)
-
-            #if troop dies it somehow loops back to max health, need to figure it out.
-            #idea to remove units from combat log and create a dummy army list similar to health and current health
-
+    @property
     def army_alive(self):
         return any(unit.alive for unit in self.army)
+    
+    def war(self, enemy_player):
 
+        random.shuffle(self.army)
+        random.shuffle(enemy_player.army)
+
+        while self.army_alive and enemy_player.army_alive:
+            for unit1, unit2 in zip_longest(self.army, enemy_player.army,
+                                            fillvalue=None):
+
+                if unit1 is not None and unit1.alive:
+                    target = random.choice(enemy_player.army)
+                    while not target.alive and enemy_player.army_alive:
+                        target = random.choice(enemy_player.army)
+                    unit1.attack(target)
+
+                if unit2 is not None and unit2.alive:
+                    target = random.choice(self.army)
+                    while not target.alive and self.army_alive:
+                        target = random.choice(self.army)
+
+                    unit2.attack(target)
+
+        if self.army_alive:
+            print(f"{self.name} wins")
+            return True
+        else:
+            print(f"{enemy_player.name} wins")
+            return False
+    
     def reset_army(self):
         for unit in self.army:
             unit.current_health = unit.health
