@@ -1,2 +1,0 @@
-# Warcry
- warcry project

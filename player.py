@@ -30,14 +30,12 @@ class Player:
                 if unit1 is not None:
                     target = random.choice(enemy_player.army)
                     unit1.attack(target)
-                    if not target.alive:
-                        enemy_player.remove(target)
+
 
                 if unit2 is not None:
                     target = random.choice(self.army)
                     unit2.attack(target)
-                    if not target.alive:
-                        self.army.remove(target)
+
             #if troop dies it somehow loops back to max health, need to figure it out.
             #idea to remove units from combat log and create a dummy army list similar to health and current health
 
